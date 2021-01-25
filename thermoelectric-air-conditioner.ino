@@ -1,8 +1,6 @@
 #include <SPI.h>
 #include <WiFiNINA.h>
 
-#include <ArduinoOTA.h>
-
 #include "secrets.h"
 
 #include "dimmer.h"
@@ -29,6 +27,8 @@ float tempC, tempF, tempK;
 void setup() {
   Serial.begin(9600);
   pinMode(13, OUTPUT);
+  pinMode(P_PELTIERS, OUTPUT);
+  dimmer.Setup();
   
   while (!Serial);
 
@@ -45,27 +45,31 @@ void setup() {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
     status = WiFi.begin(ssid, pass);
-    delay(10000);
+    delay(1000);
   }
-
-  ArduinoOTA.begin(WiFi.localIP(), ARDOTA_NAME, ARDOTA_PASS, InternalStorage);
 
   server.begin();
 
   temp.Setup();
+  dimmer.SetMax();
+  delay(20000);
+  digitalWrite(P_PELTIERS, HIGH);
+  delay(10000);
+  digitalWrite(13, HIGH);
 }
 
 void loop() {
-  ArduinoOTA.poll();
   // listen for incoming clients
   WiFiClient client = server.available();
   if (client) {
     Serial.println("new client");
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
+    String currentLine;
     while (client.connected()) {
       if (client.available()) {
         char c = client.read();
+        currentLine = currentLine + c;
         Serial.write(c);
         // if you've gotten to the end of the line (received a newline
         // character) and the line is blank, the http request has ended,
@@ -108,6 +112,11 @@ void loop() {
             client.println("K");
             client.println("<br />");
           }
+
+          //if (currentLine.indexOf("GET /led-on") >= 0) {
+          //  digitalWrite(13, HIGH);               // GET /led-on turns the LED on
+          //  myLedStatus = 1;
+          //}
           
           client.println("</html>");
           break;

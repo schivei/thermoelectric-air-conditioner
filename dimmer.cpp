@@ -1,11 +1,14 @@
-#include "DM02A.h";
+#include <DM02A.h>
 #include "dimmer.h"
 
 Dimmer::Dimmer()
 {
-  this->_dimmer = DM02A(P_SIG, P_CH, P_EN);
-  _dimmer.SendLevel(0,0);
-  _dimmer.SendLevel(0,1);
+}
+
+void Dimmer::Setup()
+{
+  _dimmer.EnviaNivel(0,0);
+  _dimmer.EnviaNivel(0,1);
 }
 
 void Dimmer::SetMax()
@@ -54,47 +57,47 @@ void Dimmer::updateLevels()
 {
   if (_level == 0)
   {
-   _dimmer.SendLevel(0,0);
-   _dimmer.SendLevel(0,1);
+   _dimmer.EnviaNivel(0,0);
+   _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 1)
   {
-   _dimmer.SendLevel(30,0);
-   _dimmer.SendLevel(0,1);
+   _dimmer.EnviaNivel(32.5,0);
+   _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 2)
   {
-   _dimmer.SendLevel(30 + 331,0);
-   _dimmer.SendLevel(0,1);
+   _dimmer.EnviaNivel(45,0);
+   _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 3)
   {
-   _dimmer.SendLevel(30 + 331 + 331,0);
-   _dimmer.SendLevel(0,1);
+   _dimmer.EnviaNivel(57.5,0);
+   _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 4)
   {
-   _dimmer.SendLevel(30 + 331 + 331 + 331,0);
-   _dimmer.SendLevel(0,1);
+   _dimmer.EnviaNivel(70,0);
+   _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 5)
   {
-   _dimmer.SendLevel(30 + 331 + 331 + 331,0);
-   _dimmer.SendLevel(30,1);
+   _dimmer.EnviaNivel(70,0);
+   _dimmer.EnviaNivel(32.5,1);
   }
   else if (_level == 6)
   {
-   _dimmer.SendLevel(30 + 331 + 331 + 331,0);
-   _dimmer.SendLevel(30 + 331,1);
+   _dimmer.EnviaNivel(70,0);
+   _dimmer.EnviaNivel(45,1);
   }
   else if (_level == 7)
   {
-   _dimmer.SendLevel(30 + 331 + 331 + 331,0);
-   _dimmer.SendLevel(30 + 331 + 331,1);
+   _dimmer.EnviaNivel(70,0);
+   _dimmer.EnviaNivel(57.5,1);
   }
   else if (_level == 8)
   {
-   _dimmer.SendLevel(30 + 331 + 331 + 331,0);
-   _dimmer.SendLevel(30 + 331 + 331 + 331,1);
+   _dimmer.EnviaNivel(70,0);
+   _dimmer.EnviaNivel(70,1);
   }
 }

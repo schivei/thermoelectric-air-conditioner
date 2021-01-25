@@ -3,3 +3,5 @@
 #define P_EN 10
 
 #define ONE_WIRE_BUS 2
+
+#define P_PELTIERS 9
