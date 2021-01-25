@@ -1,10 +1,6 @@
 #include <DM02A.h>
 #include "dimmer.h"
 
-Dimmer::Dimmer()
-{
-}
-
 void Dimmer::Setup()
 {
   _dimmer.EnviaNivel(0,0);
@@ -62,17 +58,17 @@ void Dimmer::updateLevels()
   }
   else if (_level == 1)
   {
-   _dimmer.EnviaNivel(32.5,0);
+   _dimmer.EnviaNivel(30,0);
    _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 2)
   {
-   _dimmer.EnviaNivel(45,0);
+   _dimmer.EnviaNivel(43,0);
    _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 3)
   {
-   _dimmer.EnviaNivel(57.5,0);
+   _dimmer.EnviaNivel(57,0);
    _dimmer.EnviaNivel(0,1);
   }
   else if (_level == 4)
@@ -83,17 +79,17 @@ void Dimmer::updateLevels()
   else if (_level == 5)
   {
    _dimmer.EnviaNivel(70,0);
-   _dimmer.EnviaNivel(32.5,1);
+   _dimmer.EnviaNivel(30,1);
   }
   else if (_level == 6)
   {
    _dimmer.EnviaNivel(70,0);
-   _dimmer.EnviaNivel(45,1);
+   _dimmer.EnviaNivel(43,1);
   }
   else if (_level == 7)
   {
    _dimmer.EnviaNivel(70,0);
-   _dimmer.EnviaNivel(57.5,1);
+   _dimmer.EnviaNivel(57,1);
   }
   else if (_level == 8)
   {

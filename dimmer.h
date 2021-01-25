@@ -1,9 +1,8 @@
-#include "DM02A.h"
+#include <DM02A.h>
 #include "ports.h"
 
 class Dimmer {
   public:
-    Dimmer();
     void Setup();
     void SetMax();
     void SetMin();
